@@ -1,80 +1,28 @@
 :root {
-  font-family:
-    Inter,
-    ui-sans-serif,
-    system-ui,
-    -apple-system,
-    BlinkMacSystemFont,
-    "Segoe UI",
-    sans-serif;
-
-  color: #f4f4f5;
-  background: #09090b;
-
+  font-family: Georgia, "Times New Roman", serif;
+  color: #e8e6e1;
+  background: #242424;
   font-synthesis: none;
   text-rendering: optimizeLegibility;
   -webkit-font-smoothing: antialiased;
-  -moz-osx-font-smoothing: grayscale;
-
-  --bg: #09090b;
-  --surface: #111113;
-  --surface-2: #18181b;
-  --surface-3: #1f1f23;
-
-  --border: #27272a;
-  --border-strong: #3f3f46;
-
-  --text: #f4f4f5;
-  --text-secondary: #a1a1aa;
-  --text-muted: #71717a;
-
-  --indigo: #6366f1;
-  --indigo-light: #818cf8;
-  --indigo-dark: #4f46e5;
-
-  --success: #22c55e;
-  --warning: #f59e0b;
-  --danger: #ef4444;
-
-  --radius-sm: 6px;
-  --radius-md: 8px;
-  --radius-lg: 10px;
+  --bg: #242424;
+  --sidebar: #181818;
+  --surface: #2a2a2a;
+  --elevated: #303030;
+  --border: #3a3a3a;
+  --border-strong: #515151;
+  --text: #e8e6e1;
+  --text-secondary: #b7b5b0;
+  --muted: #878681;
+  --success: #55b779;
+  --warning: #d4a94f;
+  --danger: #d66d6d;
+  --mono: "SFMono-Regular", Consolas, "Liberation Mono", monospace;
 }
-
-* {
-  box-sizing: border-box;
-}
-
-html {
-  min-width: 320px;
-  background: var(--bg);
-}
-
-body {
-  margin: 0;
-  min-width: 320px;
-  min-height: 100vh;
-  background:
-    radial-gradient(
-      circle at 75% 5%,
-      rgba(99, 102, 241, 0.07),
-      transparent 28%
-    ),
-    var(--bg);
-}
-
-button,
-input,
-select {
-  font: inherit;
-}
-
-button {
-  cursor: pointer;
-}
-
-button:disabled,
-input:disabled,
-select:disabled {
-  cursor: not-allowed;
-}
+* { box-sizing: border-box; }
+html, body, #root { min-width: 320px; min-height: 100vh; }
+body { margin: 0; background: var(--bg); }
+button, input, select { font: inherit; }
+button { cursor: pointer; }
+button:disabled { cursor: not-allowed; }
+@media (prefers-reduced-motion: reduce) { *, *::before, *::after { animation-duration: .01ms !important; transition-duration: .01ms !important; } }

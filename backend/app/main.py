@@ -7,6 +7,7 @@ from app.api.errors import (
     internal_server_exception_handler,
 )
 from app.api.routes import router
+from app.api.evaluation_routes import router as evaluation_router
 from app.core.config import settings
 
 
@@ -72,6 +73,11 @@ app.add_exception_handler(
 
 app.include_router(
     router,
+    prefix="/api/v1",
+)
+
+app.include_router(
+    evaluation_router,
     prefix="/api/v1",
 )
 

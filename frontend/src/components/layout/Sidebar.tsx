@@ -1,0 +1,8 @@
+import { Activity, Beaker, BrainCircuit, BriefcaseBusiness, ChevronRight, FileClock, Home, Settings2 } from "lucide-react";
+import { NavLink } from "react-router-dom";
+
+const sections = [{ label: "WORKSPACE", items: [{ to: "/", label: "Home", icon: Home }, { to: "/decision-studio", label: "Decision Studio", icon: BrainCircuit }, { to: "/cases", label: "Recovery Cases", icon: BriefcaseBusiness }] }, { label: "GOVERNANCE", items: [{ to: "/evaluation", label: "Evaluation Lab", icon: Beaker }, { to: "/replay", label: "Decision Replay", icon: Activity }, { to: "/audit", label: "Audit Trail", icon: FileClock }] }];
+
+export function Sidebar({ apiOnline }: { apiOnline: boolean }) {
+  return <aside className="sidebar"><div className="brand"><div className="brand-mark">R</div><div><div className="brand-name">RECLAIM</div><div className="brand-label">Decision Intelligence</div></div></div><nav className="sidebar-nav">{sections.map(section => <div className="nav-section" key={section.label}><div className="nav-label">{section.label}</div>{section.items.map(({ to, label, icon: Icon }) => <NavLink end={to === "/"} className={({ isActive }) => `nav-item${isActive ? " active" : ""}`} to={to} key={to}><Icon size={16} /><span>{label}</span>{label === "Decision Studio" && <ChevronRight className="nav-arrow" size={14} />}</NavLink>)}</div>)}</nav><div className="sidebar-footer"><div className="engine-status"><span className={`status-dot ${apiOnline ? "online" : "offline"}`} />{apiOnline ? "Engine operational" : "Engine offline"}</div><NavLink className="settings-link" to="#"><Settings2 size={15} /> Settings</NavLink><div className="version">v0.1.0</div></div></aside>;
+}

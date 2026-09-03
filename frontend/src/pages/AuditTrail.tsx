@@ -1,0 +1,7 @@
+import { FileClock, LockKeyhole } from "lucide-react";
+import { PageHeader } from "../components/ui/PageHeader";
+import { SectionHeader } from "../components/ui/SectionHeader";
+import { StatusBadge } from "../components/ui/StatusBadge";
+import { auditEvents } from "../data/mockDecisionData";
+
+export function AuditTrail() { return <><PageHeader eyebrow="AUDIT TRAIL" title="Inspect system decisions" description="Trace every decision from case context through policy evaluation, execution, and outcome." action={<StatusBadge tone="success"><LockKeyhole size={12} /> Immutable record</StatusBadge>} /><section className="panel table-panel"><SectionHeader eyebrow="EVENT HISTORY" title="Decision evidence" detail="Demo events · UTC" /><div className="table-wrap"><table><thead><tr><th>TIMESTAMP</th><th>DECISION ID</th><th>EVENT</th><th>POLICY RESULT</th><th>ACTION</th><th>OUTCOME</th></tr></thead><tbody>{auditEvents.map(event => <tr className="interactive-row" key={event.id}><td className="mono muted">{event.time}</td><td className="mono table-primary">{event.id}</td><td>{event.event}</td><td><StatusBadge tone={event.policy === "Passed" ? "success" : "warning"}>{event.policy}</StatusBadge></td><td>{event.action.replaceAll("_", " ")}</td><td className="muted">{event.outcome}</td></tr>)}</tbody></table></div><div className="audit-footnote"><FileClock size={15} /> Every event records the decision context, governing policy result, and resulting action.</div></section></>; }
