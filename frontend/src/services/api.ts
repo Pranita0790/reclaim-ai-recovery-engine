@@ -1,6 +1,15 @@
 import type { RecoveryRequest, RecoveryResult } from "../types/recovery";
 import type { CaseEvaluation, EvaluationReplay, EvaluationSummary, MultiSeedStrategy, ScenarioEvaluation, StrategyEvaluation } from "../types/evaluation";
 
+export type AuditEvent = {
+  event_id: string;
+  case_id: string;
+  event_type: string;
+  message: string;
+  data: Record<string, unknown>;
+  created_at: string;
+};
+
 const API_BASE_URL = "/api/v1";
 
 async function getJson<T>(path: string): Promise<T> {
@@ -44,6 +53,10 @@ export function getEvaluationCases(options: { strategy?: string; scenario?: stri
 
 export function getEvaluationReplay(caseId: string, seed = 42): Promise<EvaluationReplay> {
   return getJson<EvaluationReplay>(`/evaluation/replay/${encodeURIComponent(caseId)}?seed=${seed}`);
+}
+
+export function getAuditTrail(): Promise<AuditEvent[]> {
+  return getJson<AuditEvent[]>("/recovery/audit");
 }
 
 export async function checkApiHealth(): Promise<boolean> {
