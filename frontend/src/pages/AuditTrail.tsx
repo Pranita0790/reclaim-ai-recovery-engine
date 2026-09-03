@@ -55,7 +55,7 @@ export function AuditTrail() {
         description="Trace every decision from case context through policy evaluation, execution, and outcome."
         action={
           <StatusBadge tone="success">
-            <LockKeyhole size={12} /> Immutable record
+            <LockKeyhole size={12} /> Audit evidence
           </StatusBadge>
         }
       />
