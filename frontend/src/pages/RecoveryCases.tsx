@@ -3,7 +3,8 @@ import { useEffect, useState } from "react";
 import { PageHeader } from "../components/ui/PageHeader";
 import { SectionHeader } from "../components/ui/SectionHeader";
 import { StatusBadge } from "../components/ui/StatusBadge";
-import { getEvaluationCases, type CaseEvaluation } from "../services/api";
+import { getEvaluationCases } from "../services/api";
+import type { CaseEvaluation } from "../types/evaluation";
 
 const formatCurrency = (value: number) =>
   new Intl.NumberFormat("en-IN", {
