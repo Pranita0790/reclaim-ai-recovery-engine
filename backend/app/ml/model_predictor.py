@@ -4,11 +4,8 @@ from pathlib import Path
 
 import joblib
 
-from app.models.case import (
-    FailureReason,
-    PaymentStatus,
-    RecoveryCase,
-)
+from app.ml.feature_engineering import FeatureEngineering
+from app.models.case import RecoveryCase
 
 
 class RecoveryModelPredictor:
@@ -58,54 +55,7 @@ class RecoveryModelPredictor:
         used during model training.
         """
 
-        payment_status_features = [
-            1.0 if case.payment_status is PaymentStatus.FAILED else 0.0,
-            1.0
-            if case.payment_status is PaymentStatus.RECOVERABLE
-            else 0.0,
-            1.0
-            if case.payment_status is PaymentStatus.RECOVERED
-            else 0.0,
-            1.0 if case.payment_status is PaymentStatus.EXPIRED else 0.0,
-        ]
-
-        failure_reason_features = [
-            1.0
-            if case.failure_reason
-            is FailureReason.INSUFFICIENT_FUNDS
-            else 0.0,
-            1.0
-            if case.failure_reason
-            is FailureReason.CARD_DECLINED
-            else 0.0,
-            1.0
-            if case.failure_reason
-            is FailureReason.NETWORK_ERROR
-            else 0.0,
-            1.0
-            if case.failure_reason
-            is FailureReason.AUTHENTICATION_FAILED
-            else 0.0,
-            1.0
-            if case.failure_reason
-            is FailureReason.PAYMENT_METHOD_EXPIRED
-            else 0.0,
-            1.0
-            if case.failure_reason
-            is FailureReason.UNKNOWN
-            else 0.0,
-        ]
-
-        return [
-            float(case.amount),
-            float(case.failure_count),
-            float(case.customer_attempt_count),
-            float(case.days_since_failure),
-            float(case.is_customer_active),
-            float(case.has_valid_payment_method),
-            *payment_status_features,
-            *failure_reason_features,
-        ]
+        return FeatureEngineering().transform(case)
 
     def predict_recovery_probability(
         self,
