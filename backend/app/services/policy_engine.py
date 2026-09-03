@@ -27,6 +27,9 @@ class PolicyEngine:
         # Global policy checks
         # --------------------------------------------------
 
+        if action is RecoveryAction.DO_NOTHING:
+            return True, "No action is always allowed."
+
         if case.days_since_failure > MAX_DAYS_FOR_AUTOMATIC_RECOVERY:
             return (
                 False,

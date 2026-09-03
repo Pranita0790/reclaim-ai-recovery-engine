@@ -95,8 +95,6 @@ class EvaluationRunner:
         valid_actions: set[RecoveryAction] = set()
         for action in RecoveryAction:
             allowed, _ = self.policy_engine.evaluate(case, action)
-            if action is RecoveryAction.DO_NOTHING:
-                allowed = True
             if allowed:
                 valid_actions.add(action)
             outcomes[action] = simulator.simulate(case, action, allowed)
